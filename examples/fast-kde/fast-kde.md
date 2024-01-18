@@ -30,6 +30,9 @@ output:
 | Gaussian kernel density estimation for a single impulse value ($m$ = 512 bins, $\sigma$ = 0.2). Iterated uniform ("box") filters [@Wells:1986; @Gwosdek:2011] (red & dashed) underestimate the mode and overestimate the sides of the distribution. Deriche's [@Deriche:1990; @Deriche:1993] linear-time recursive filter approximation (blue) produces a pixel-perfect match to the true distribution (grey).
 :::
 
+[:divi-viz:]{filepath=figures/impulse_1d.svg}
+
+
 ::: abstract
 Kernel density estimation (KDE) models a discrete sample of data as a continuous distribution, supporting the construction of visualizations such as violin plots, heatmaps, and contour plots.
 This paper draws on the statistics and image processing literature to survey efficient and scalable density estimation techniques for the common case of Gaussian kernel functions.
