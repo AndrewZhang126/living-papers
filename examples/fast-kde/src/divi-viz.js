@@ -1,6 +1,6 @@
 import { ArticleElement } from '@living-papers/components';
-// import { hydrate } from 'uwdata-divi';
-import { hydrate } from '/node_modules/uwdata-divi';
+import { hydrate } from 'uwdata-divi';
+// import { hydrate } from '/node_modules/uwdata-divi';
 
 export default class Divi extends ArticleElement {
 
