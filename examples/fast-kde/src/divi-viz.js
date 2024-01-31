@@ -1,6 +1,6 @@
 import { ArticleElement } from '@living-papers/components';
 import { ascending } from 'd3-array'
-import { hydrate } from 'uwdata-divi';
+// import { hydrate } from 'uwdata-divi';
 // import { Color } from 'd3-color'
 // import { hydrate } from '/node_modules/uwdata-divi';
 
@@ -26,7 +26,7 @@ export default class Divi extends ArticleElement {
     const svgContainer = document.createElement('div');
     svgContainer.innerHTML = svgCode;
     console.log(ascending(1, 2));
-    hydrate(null);
+    // hydrate(null);
     // hydrate(svgContainer)
     // Color();
     // this._root.innerHTML = `<img src="${this.svg}"/>`

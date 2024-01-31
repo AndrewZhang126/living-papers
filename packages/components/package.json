@@ -42,6 +42,10 @@
         "css": "css/cross-ref.css"
       },
       {
+        "name": "divi-viz",
+        "file": "src/divi-viz.js"
+      },
+      {
         "name": "inline-note",
         "import": "InlineNote",
         "file": "src/inline-note.js",
