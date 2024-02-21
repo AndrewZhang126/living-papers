@@ -22,14 +22,9 @@ viewof a = Inputs.range([0, 255], {step: 1, value: init})
 format = new Intl.NumberFormat().format
 ---
 plot = Plot.plot({
-  marginLeft: 50,
-  y: { grid: true },
   marks: [
-    Plot.ruleX([a], { stroke: '#888' }),
-    Plot.line(d3.range(0, Math.max(256, a)), { x: d => d, y: d => d * d, stroke: 'steelblue', strokeWidth: 2 }),
-    Plot.dot([a], { x: d => d, y: d => d * d, fill: 'steelblue' })
+   Plot.lineY([1,2,3])
   ],
-  height: 300
 })
 ```
 | A plot of $$y = x^2$$ at $$x = ${a}$$, $$x^2 = ${a * a}$$.

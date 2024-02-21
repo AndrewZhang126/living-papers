@@ -18,7 +18,6 @@ export default class Divi extends ArticleElement {
     this.filepath = "";
   }
 
-
   render() {
     //create a div and display this svg
     this._root = document.createElement('div');

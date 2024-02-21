@@ -42,6 +42,7 @@ export class CodeBlock extends DependentElement {
     language
       ? (root.innerHTML = hljs.highlight(this.code, { language }).value)
       : (root.innerText = this.code);
+    console.log(root)
     return root;
   }
 }

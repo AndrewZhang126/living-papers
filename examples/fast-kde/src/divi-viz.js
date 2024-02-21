@@ -18,7 +18,6 @@ export default class Divi extends ArticleElement {
     this.filepath = "";
   }
 
-
   render() {
     //create a div and display this svg
     this._root = document.createElement('div');
@@ -26,6 +25,7 @@ export default class Divi extends ArticleElement {
     const svgContainer = document.createElement('div');
     svgContainer.innerHTML = svgCode;
     console.log(ascending(1, 2));
+    console.log('test');
     // hydrate(null);
     // hydrate(svgContainer)
     // Color();
@@ -50,3 +50,53 @@ export default class Divi extends ArticleElement {
   }
 }
 
+// import { DependentElement } from '@living-papers/components';
+
+// export default class Divi extends DependentElement {
+//   static get dependencies() {
+//     return [
+//       {
+//         name: '@uwdata/highlightjs',
+//         version: '0.0.1',
+//         main: 'dist/highlight.min.js',
+//         css: 'dist/styles/github.css'
+//       }
+//     ]
+//   }
+
+//   static get properties() {
+//     return {
+//       code: {type: String},
+//       inline: {type: Boolean},
+//       language: {type: String}
+//     };
+//   }
+
+//   constructor() {
+//     super();
+//     this.inline = false;
+//     this.language = null;
+//   }
+
+//   initialChildNodes(nodes) {
+//     // attempt to extract code from first child
+//     if (!this.hasAttribute('code') && nodes.length) {
+//       this.code = nodes[0].textContent.trim();
+//     }
+//   }
+
+//   render() {
+//     // console.log(ascending(1, 2));
+//     const hljs = this.getDependency('@uwdata/highlightjs');
+//     if (!hljs || !this.code) return;
+
+//     const { language, inline } = this;
+//     const root = document.createElement(inline ? 'code' : 'pre');
+//     language
+//       ? (root.innerHTML = hljs.highlight(this.code, { language }).value)
+//       : (root.innerText = this.code);
+//     console.log(root)
+//     console.log(language)
+//     return root;
+//   }
+// }
