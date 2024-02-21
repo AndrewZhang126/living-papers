@@ -31,8 +31,8 @@ output:
 :::
 
 <!-- [:divi-viz:]{filepath=figures/impulse_1d.svg} -->
-<!-- [:divi-viz:]{code=console.log("test")} -->
-[:divi-viz:]{
+
+<!-- [:divi-viz:]{
    ``` js
 plot = Plot.plot({
   marks: [
@@ -40,7 +40,7 @@ plot = Plot.plot({
   ]
 });
 ```
-} -->
+}  -->
 
 
 ::: divi-viz
@@ -48,7 +48,8 @@ plot = Plot.plot({
 plot = Plot.plot({
   marks: [
     Plot.lineY([1,2,3])
-  ]
+  ],
+  className: "test1"
 });
 ```
 :::
@@ -56,32 +57,13 @@ plot = Plot.plot({
 
 ::: figure
 ``` js
-plot = Plot.plot({
+plot3 = Plot.plot({
   marks: [
     Plot.lineY([1,2,3])
   ]
 });
 ```
 ::: 
-
-<!-- ::: cell-view
-``` js
-plot = Plot.plot({
-  marks: [
-    Plot.lineY([1,2,3])
-  ]
-})
-```
-::: -->
-
-
-<!-- ~~~ divi-viz
-  Inputs.range([0, 77], { step: 1, label: 'Inserted Points' })
-~~~ -->
-
-<!-- ~~~ js
-  Inputs.range([0, 77], { step: 1, label: 'Inserted Points' })
-~~~ -->
 
 ::: abstract
 Kernel density estimation (KDE) models a discrete sample of data as a continuous distribution, supporting the construction of visualizations such as violin plots, heatmaps, and contour plots.
