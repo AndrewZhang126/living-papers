@@ -1,4 +1,6 @@
 import { ArticleElement } from '@living-papers/components';
+import { FULFILLED, PENDING } from '@living-papers/runtime';
+// import { CellView } from '../../../packages/components/src/cell-view';
 // import { ascending } from 'd3-array'
 // import { hydrate } from 'uwdata-divi';
 // import { Color } from 'd3-color'
@@ -17,41 +19,76 @@ export default class Divi extends ArticleElement {
     super();
     this.filepath = "";
     this.connectedCallback
-    console.log(this.__children)
+
+    //store divified svg
+    this.svg = "";
+    this.status = PENDING;
+    //check contents of children
+    // console.log(this.__children)
   }
 
-  // connectedCallback() {
-  //   if (!this.__initchildnodes) {
-  //     // detach initial child nodes upon first connection to the DOM
-  //     this.__initchildnodes = true;
-  //     this.initialChildNodes(
-  //       Array.from(this.childNodes, node => (node.__element = this, node))
-  //     );
-  //     console.log(this.initialChildNodes)
-  //   }
-  //   super.connectedCallback();
-  // }
+  // code should be rendered as cell-view and should be a child
+  initialChildNodes(nodes) {
+    // child should be cell-view
 
-  // initialChildNodes(nodes) {
-  //   // attempt to extract code from first child
-  //   if (!this.hasAttribute('code') && nodes.length) {
-  //     this.code = nodes[0].textContent.trim();
-  //   }
-  // }
+    //test if cell-view gets fulfilled 
+    setTimeout(function() { 
+      console.log(this.__children[0].stats);
+    }, 1000);
+  
+    const firstChild = nodes[0]
+    let svgContent = firstChild.value
+    if (firstChild.status === FULFILLED) {
+      console.log("fulfilled")
+      svgContent = firstChild.value
+      // this.__children.addNode(hydrate(svgContent))
+      this.__children.addNode(svgContent)
+    }
+    else if (firstChild.status === PENDING) {
+      console.log("pending")
+      //use event listener to figure out when status is fulfilled
+      console.log(firstChild.observer)
+    }
+    this.__children = nodes
+  }
+
+  //wait for cell-view to render
+  async getChild() {
+
+    const el = this.__children[0]
+    // wait for element to be ready, get content type
+    if (el.observer) {
+      // wait for reactive runtime cell
+      const value = await el.observer.promise();
+      console.log("value: " + value)
+    }
+  }
 
   render() {
-
-    //use div as identifier 
-
+    //should be children with fulfilled cell views and divi-fied svg?
+    // console.log("test " + this.__children[0].value)
+    // console.log(this.svg)
+    // // setTimeout(function() { this.svg = this.__children[0].value; }, 10000);
+    // document.addEventListener("change", function() { // (1)
+    //   alert("Hello from " +  this.__children[0].observer); // Hello from H1
+    // });
+    // console.log(this.svg)
+    
     //create a div and display this svg
-    this.testroot = document.querySelector("test1");
-    console.log(this.testroot)
-    console.log.apply(this.code)
+    // this.testroot = document.querySelector("test1");
+    // console.log(this.testroot)
+    // console.log.apply(this.code)
+    // if (this.status === FULFILLED) {
+    //   console.log(this.svg)
+    // }
+    this.getChild();
     this._root = document.createElement('div');
-    const svgCode = '<svg <rect width="10" height="10" y="80"></rect> </svg>';
-    const svgContainer = document.createElement('div');
-    svgContainer.innerHTML = svgCode;
-    this._root.insertBefore(svgContainer);
+    this._root.innerHTML = this.filepath;
+    return this._root
+    // const svgCode = '<svg <rect width="10" height="10" y="80"></rect> </svg>';
+    // const svgContainer = document.createElement('div');
+    // svgContainer.innerHTML = svgCode;
+    // this._root.insertBefore(svgContainer);
     // console.log(ascending(1, 2));
     // console.log('test');
     // hydrate(null);
@@ -74,58 +111,5 @@ export default class Divi extends ArticleElement {
     //   .then(text => console.log(hydrate(text)))
     
     // this._root.innerHTML = this.filepath;
-    return this._root
-
   }
 }
-
-// import { DependentElement } from '@living-papers/components';
-
-// export default class Divi extends DependentElement {
-//   static get dependencies() {
-//     return [
-//       {
-//         name: '@uwdata/highlightjs',
-//         version: '0.0.1',
-//         main: 'dist/highlight.min.js',
-//         css: 'dist/styles/github.css'
-//       }
-//     ]
-//   }
-
-//   static get properties() {
-//     return {
-//       code: {type: String},
-//       inline: {type: Boolean},
-//       language: {type: String}
-//     };
-//   }
-
-//   constructor() {
-//     super();
-//     this.inline = false;
-//     this.language = null;
-//   }
-
-//   initialChildNodes(nodes) {
-//     // attempt to extract code from first child
-//     if (!this.hasAttribute('code') && nodes.length) {
-//       this.code = nodes[0].textContent.trim();
-//     }
-//   }
-
-//   render() {
-//     // console.log(ascending(1, 2));
-//     const hljs = this.getDependency('@uwdata/highlightjs');
-//     if (!hljs || !this.code) return;
-
-//     const { language, inline } = this;
-//     const root = document.createElement(inline ? 'code' : 'pre');
-//     language
-//       ? (root.innerHTML = hljs.highlight(this.code, { language }).value)
-//       : (root.innerText = this.code);
-//     console.log(root)
-//     console.log(language)
-//     return root;
-//   }
-// }

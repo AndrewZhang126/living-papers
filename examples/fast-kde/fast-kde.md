@@ -33,23 +33,22 @@ output:
 <!-- [:divi-viz:]{filepath=figures/impulse_1d.svg} -->
 
 <!-- [:divi-viz:]{
-   ``` js
+``` js
 plot = Plot.plot({
   marks: [
     Plot.lineY([1,2,3])
   ]
 });
-```
-}  -->
+``` 
+} -->
 
 
-::: divi-viz
+::: divi-viz {filepath=test}
 ``` js
 plot = Plot.plot({
   marks: [
     Plot.lineY([1,2,3])
-  ],
-  className: "test1"
+  ]
 });
 ```
 :::
