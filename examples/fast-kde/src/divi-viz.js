@@ -32,9 +32,9 @@ export default class Divi extends ArticleElement {
     // child should be cell-view
 
     //test if cell-view gets fulfilled 
-    setTimeout(function() { 
-      console.log(this.__children[0].stats);
-    }, 1000);
+    setInterval(function() { 
+      console.log(nodes[0].status);
+    }, 2000);
   
     const firstChild = nodes[0]
     let svgContent = firstChild.value
@@ -56,6 +56,7 @@ export default class Divi extends ArticleElement {
   async getChild() {
 
     const el = this.__children[0]
+    console.log(el)
     // wait for element to be ready, get content type
     if (el.observer) {
       // wait for reactive runtime cell
