@@ -43,7 +43,7 @@ plot = Plot.plot({
 } -->
 
 
-::: divi-viz {filepath=test}
+::: divi-viz
 ``` js
 plot = Plot.plot({
   marks: [
@@ -53,7 +53,7 @@ plot = Plot.plot({
 ```
 :::
 
-
+<!-- 
 ::: figure
 ``` js
 plot3 = Plot.plot({
@@ -62,7 +62,7 @@ plot3 = Plot.plot({
   ]
 });
 ```
-::: 
+:::  -->
 
 ::: abstract
 Kernel density estimation (KDE) models a discrete sample of data as a continuous distribution, supporting the construction of visualizations such as violin plots, heatmaps, and contour plots.

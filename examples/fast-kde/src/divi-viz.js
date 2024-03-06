@@ -18,7 +18,6 @@ export default class Divi extends ArticleElement {
   constructor() {
     super();
     this.filepath = "";
-    this.connectedCallback
 
     //store divified svg
     this.svg = "";
@@ -29,9 +28,15 @@ export default class Divi extends ArticleElement {
 
   // code should be rendered as cell-view and should be a child
   initialChildNodes(nodes) {
+
+    console.log(nodes)
+
+    nodes[0].addEventListener("change", function() { 
+      console.log("Hello from " + nodes[0].observer); 
+    });
     // child should be cell-view
 
-    //test if cell-view gets fulfilled 
+    //test if cell-view gets fulfilled
     setInterval(function() { 
       console.log(nodes[0].status);
     }, 2000);
@@ -70,8 +75,8 @@ export default class Divi extends ArticleElement {
     // console.log("test " + this.__children[0].value)
     // console.log(this.svg)
     // // setTimeout(function() { this.svg = this.__children[0].value; }, 10000);
-    // document.addEventListener("change", function() { // (1)
-    //   alert("Hello from " +  this.__children[0].observer); // Hello from H1
+    // this.__children[0].addEventListener("change", function() { 
+    //   console.log("Hello from " +  this.__children[0].observer); 
     // });
     // console.log(this.svg)
     
@@ -83,9 +88,11 @@ export default class Divi extends ArticleElement {
     //   console.log(this.svg)
     // }
     this.getChild();
+    this.connectedCallback()
+    console.log(this.__children);
     this._root = document.createElement('div');
-    this._root.innerHTML = this.filepath;
-    return this._root
+    this._root.innerHTML = "test";
+    return this._root;
     // const svgCode = '<svg <rect width="10" height="10" y="80"></rect> </svg>';
     // const svgContainer = document.createElement('div');
     // svgContainer.innerHTML = svgCode;
