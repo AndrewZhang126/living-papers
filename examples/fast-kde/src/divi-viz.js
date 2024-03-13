@@ -1,5 +1,6 @@
 import { ArticleElement } from '@living-papers/components';
 import { FULFILLED, PENDING } from '@living-papers/runtime';
+// import { CELL_VIEW } from 'living-papers/packages/runtime/src/constants.js';
 // import { CellView } from '../../../packages/components/src/cell-view';
 // import { ascending } from 'd3-array'
 // import { hydrate } from 'uwdata-divi';
@@ -38,8 +39,23 @@ export default class Divi extends ArticleElement {
 
     //test if cell-view gets fulfilled
     setInterval(function() { 
-      console.log(nodes[0].status);
+      console.log(nodes[0].observer);
     }, 2000);
+
+  const map = new Map;
+  const rootNode = document.querySelector('divi-viz');
+  rootNode.querySelectorAll('cell-view').forEach(node => {
+    map.set(+node.getAttribute('data-cell'), node.observer);
+  });
+  console.log(map)
+  // return def => map.get(def.cell);
+  //   const rootNode = document.querySelector('divi-viz');
+  //   rootNode.querySelectorAll('cell-view').forEach(node => {
+  //     console.log("test cell-view")
+  //     console.log(node)
+  //   });
+
+  
   
     const firstChild = nodes[0]
     let svgContent = firstChild.value
