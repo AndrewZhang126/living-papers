@@ -144,7 +144,6 @@ function scan(_) {
           if (j > i) {
             const name = _.sub(i, j);
             const repl = name[0] === '.' || name[0] === '#' ? name : `component=${name}`;
-            console.log(name)
             if (l) {
               _.write(i, `{${repl} `, k + 1);
               i = k + 1;

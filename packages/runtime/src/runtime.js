@@ -98,6 +98,7 @@ export class ObservableRuntime {
       } else if (def.define) {
         const [name, inputs, defn] = def.define;
         this.variable(name, defn, inputs, observer(def));
+        console.log(name)
       }
     });
   }

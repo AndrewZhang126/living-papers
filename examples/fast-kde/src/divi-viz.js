@@ -1,5 +1,6 @@
 import { ArticleElement } from '@living-papers/components';
 import { FULFILLED, PENDING } from '@living-papers/runtime';
+import { select } from 'd3-selection';
 // import { CELL_VIEW } from 'living-papers/packages/runtime/src/constants.js';
 // import { CellView } from '../../../packages/components/src/cell-view';
 // import { ascending } from 'd3-array'
@@ -27,66 +28,72 @@ export default class Divi extends ArticleElement {
     // console.log(this.__children)
   }
 
-  // code should be rendered as cell-view and should be a child
-  initialChildNodes(nodes) {
+  // // code should be rendered as cell-view and should be a child
+  // initialChildNodes(nodes) {
 
-    console.log(nodes)
+  //   // console.log(nodes)
 
-    nodes[0].addEventListener("change", function() { 
-      console.log("Hello from " + nodes[0].observer); 
-    });
-    // child should be cell-view
+  //   // nodes[0].addEventListener("change", function() { 
+  //   //   console.log("Hello from " + nodes[0].observer); 
+  //   // });
+  //   // child should be cell-view
 
-    //test if cell-view gets fulfilled
-    setInterval(function() { 
-      console.log(nodes[0].observer);
-    }, 2000);
+  //   //test if cell-view gets fulfilled
+    
+  //   // setInterval(function() { 
+  //   //   console.log(nodes[0].observer);
+  //   // }, 2000);
 
-  const map = new Map;
-  const rootNode = document.querySelector('divi-viz');
-  rootNode.querySelectorAll('cell-view').forEach(node => {
-    map.set(+node.getAttribute('data-cell'), node.observer);
-  });
-  console.log(map)
-  // return def => map.get(def.cell);
-  //   const rootNode = document.querySelector('divi-viz');
-  //   rootNode.querySelectorAll('cell-view').forEach(node => {
-  //     console.log("test cell-view")
-  //     console.log(node)
-  //   });
+  //   // const map = new Map;
+  //   // const rootNode = document.querySelector('divi-viz');
+  //   // rootNode.querySelectorAll('cell-view').forEach(node => {
+  //   //   map.set(+node.getAttribute('data-cell'), node.observer);
+  //   // });
+  //   // console.log(map)
+    
+  // // return def => map.get(def.cell);
+  // //   const rootNode = document.querySelector('divi-viz');
+  // //   rootNode.querySelectorAll('cell-view').forEach(node => {
+  // //     console.log("test cell-view")
+  // //     console.log(node)
+  // //   });
 
   
-  
-    const firstChild = nodes[0]
-    let svgContent = firstChild.value
-    if (firstChild.status === FULFILLED) {
-      console.log("fulfilled")
-      svgContent = firstChild.value
-      // this.__children.addNode(hydrate(svgContent))
-      this.__children.addNode(svgContent)
-    }
-    else if (firstChild.status === PENDING) {
-      console.log("pending")
-      //use event listener to figure out when status is fulfilled
-      console.log(firstChild.observer)
-    }
-    this.__children = nodes
-  }
+  //   const firstChild = nodes[0]
+  //   let svgContent = firstChild.value
+  //   if (firstChild.status === FULFILLED) {
+  //     console.log("fulfilled")
+  //     svgContent = firstChild.value
+  //     // this.__children.addNode(hydrate(svgContent))
+  //     this.__children.addNode(svgContent)
+  //   }
+  //   // else if (firstChild.status === PENDING) {
+  //   //   console.log("pending")
+  //   //   //use event listener to figure out when status is fulfilled
+  //   //   console.log(firstChild.observer)
+  //   // }
+  //   this.__children = nodes
+  // }
 
-  //wait for cell-view to render
-  async getChild() {
+  // //wait for cell-view to render
+  // async getChild() {
 
-    const el = this.__children[0]
-    console.log(el)
-    // wait for element to be ready, get content type
-    if (el.observer) {
-      // wait for reactive runtime cell
-      const value = await el.observer.promise();
-      console.log("value: " + value)
-    }
-  }
+  //   // const el = this.__children[0]
+  //   // console.log(el)
+  //   // wait for element to be ready, get content type
+  //   // if (el.observer) {
+  //   //   // wait for reactive runtime cell
+  //   //   const value = await el.observer.promise();
+  //   //   console.log("value: " + value)
+  //   // }
+  // }
 
   render() {
+    const tmp = this.__children[0];
+    var that = this;
+    console.log(tmp.observer.status);
+    tmp.addEventListener('change', function() { console.log(Array.from(that.__children[0].children)) });
+    return tmp;
     //should be children with fulfilled cell views and divi-fied svg?
     // console.log("test " + this.__children[0].value)
     // console.log(this.svg)
@@ -103,12 +110,12 @@ export default class Divi extends ArticleElement {
     // if (this.status === FULFILLED) {
     //   console.log(this.svg)
     // }
-    this.getChild();
-    this.connectedCallback()
-    console.log(this.__children);
-    this._root = document.createElement('div');
-    this._root.innerHTML = "test";
-    return this._root;
+    // this.getChild();
+    // this.connectedCallback()
+    // // console.log(this.__children);
+    // this._root = document.createElement('div');
+    // this._root.innerHTML = "test";
+    // return this._root;
     // const svgCode = '<svg <rect width="10" height="10" y="80"></rect> </svg>';
     // const svgContainer = document.createElement('div');
     // svgContainer.innerHTML = svgCode;

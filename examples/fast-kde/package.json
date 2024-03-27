@@ -20,6 +20,7 @@
     ]
   },
   "dependencies": {
+    "d3-selection": "^3.0.0",
     "uwdata-divi": "^0.0.0"
   }
 }
