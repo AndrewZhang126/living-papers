@@ -1,6 +1,7 @@
 import { ArticleElement } from '@living-papers/components';
 import { FULFILLED, PENDING } from '@living-papers/runtime';
 import { select } from 'd3-selection';
+import { html } from 'lit';
 // import { CELL_VIEW } from 'living-papers/packages/runtime/src/constants.js';
 // import { CellView } from '../../../packages/components/src/cell-view';
 // import { ascending } from 'd3-array'
@@ -24,12 +25,34 @@ export default class Divi extends ArticleElement {
     //store divified svg
     this.svg = "";
     this.status = PENDING;
+    // const targetNode = document.querySelector("divi-viz");
+    // const config = { attributes: true }
+    // console.log(targetNode);
+    // const callback = (mutationList, observer) => {
+    //   for (const mutation of mutationList) {
+    //     console.log(mutation + " " + observer)
+    //   }
+    // };
+    // const observer = new MutationObserver(callback);
+    // observer.observe(targetNode, config)
     //check contents of children
     // console.log(this.__children)
   }
 
   // // code should be rendered as cell-view and should be a child
   // initialChildNodes(nodes) {
+  //   console.log(nodes)
+  //   const targetNode = document.querySelector("divi-viz");
+  //   const config = { attributes: true }
+  //   console.log(targetNode);
+  //   const callback = (mutationList, observer) => {
+  //     for (const mutation of mutationList) {
+  //       console.log(mutation + " " + observer)
+  //     }
+  //   };
+  //   const observer = new MutationObserver(callback);
+  //   observer.observe(targetNode, config)
+  // }
 
   //   // console.log(nodes)
 
@@ -89,11 +112,50 @@ export default class Divi extends ArticleElement {
   // }
 
   render() {
-    const tmp = this.__children[0];
-    var that = this;
-    console.log(tmp.observer.status);
-    tmp.addEventListener('change', function() { console.log(Array.from(that.__children[0].children)) });
-    return tmp;
+    // console.log(this.__children[0])
+    // // console.log(this.__children[0].getElementsByClassName("plot-d6a7b5").innerHTML)
+    // console.log(this.__children[0].contentDocument)
+    // console.log(Object.entries(this.__children[0]));
+
+    // let tmp = this.__children[0];
+    // let that = this;
+    // console.log(tmp.children);
+    // tmp.addEventListener('change', function() { 
+    //   // let temp = Array.from(that.__children[0].children)
+    //   // console.log(temp)
+    //   console.log(that.__children[0]) 
+    //   console.log(that.__children[0].children) 
+    //   console.log(that.__children[0].children[0]) 
+    // });
+
+
+    const targetNode = document.querySelector("divi-viz");
+    // console.log(targetNode);
+    const config = { childList: true, subtree: true }
+
+    let renderedSVG = "";
+    // const callback = (mutationList, observer) => {
+    //   for (const mutation of mutationList) {
+    //     console.log(mutation.type + " " + observer.status)
+    //   }
+    // };
+    // const observer = new MutationObserver(callback);
+    let observer = new MutationObserver(function(mutations) {  
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'childList') {
+          let list_values = [].slice.call(targetNode.children);
+          renderedSVG = list_values[0].getElementsByTagName("svg")[0]
+          console.log(list_values[0]);
+          console.log(renderedSVG);
+        }
+      });
+    });
+    observer.observe(targetNode, config);
+  
+    // observer.observe(targetNode, config);
+    // observer.disconnect();
+    return this.__children[0];
+    // return this.__children[0];
     //should be children with fulfilled cell views and divi-fied svg?
     // console.log("test " + this.__children[0].value)
     // console.log(this.svg)
