@@ -51,6 +51,13 @@ plot = Plot.plot({
   ]
 });
 ```
+``` js
+Plot.plot({
+  marks: [
+    Plot.dot(cars, {x: "power (hp)", y: "economy (mpg)"})
+  ]
+});
+```
 :::
 
 <!-- 
