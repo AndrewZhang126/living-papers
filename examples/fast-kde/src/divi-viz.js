@@ -1,6 +1,5 @@
 import { ArticleElement } from '@living-papers/components';
 import { FULFILLED, PENDING } from '@living-papers/runtime';
-import { select } from 'd3-selection';
 import { html } from 'lit';
 // import { CELL_VIEW } from 'living-papers/packages/runtime/src/constants.js';
 // import { CellView } from '../../../packages/components/src/cell-view';
@@ -117,16 +116,10 @@ export default class Divi extends ArticleElement {
     // console.log(this.__children[0].contentDocument)
     // console.log(Object.entries(this.__children[0]));
 
-    // let tmp = this.__children[0];
-    // let that = this;
-    // console.log(tmp.children);
-    // tmp.addEventListener('change', function() { 
-    //   // let temp = Array.from(that.__children[0].children)
-    //   // console.log(temp)
-    //   console.log(that.__children[0]) 
-    //   console.log(that.__children[0].children) 
-    //   console.log(that.__children[0].children[0]) 
-    // });
+    let tmp = this.__children[0];
+    tmp.addEventListener('change', function(event) {
+      console.log(event.target.value); 
+    });
 
 
     const targetNode = document.querySelector("divi-viz");
@@ -145,8 +138,8 @@ export default class Divi extends ArticleElement {
         if (mutation.type === 'childList') {
           let list_values = [].slice.call(targetNode.children);
           renderedSVG = list_values[0].getElementsByTagName("svg")[0]
-          console.log(list_values[0]);
-          console.log(renderedSVG);
+          // console.log(list_values[0]);
+          // console.log(renderedSVG);
         }
       });
     });

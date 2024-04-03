@@ -16,9 +16,7 @@ export class CellView extends ArticleElement {
     this.observer = new Observer((status, value) => {
       this.status = status;
       if (status !== PENDING) {
-        console.log("test")
-        this.value = value;
-        console.log(this);
+        this.value = value;;
         this.dispatchEvent(new Event('change'));
       }
     });

@@ -26,12 +26,9 @@ function resolver(root) {
 
 function observeCells(root) {
   const map = new Map;
-  console.log("before observe selector");
   root.querySelectorAll(CELL_VIEW).forEach(node => {
     map.set(+node.getAttribute(DATA_CELL), node.observer);
   });
-  console.log("test map")
-  console.log(map)
   return def => map.get(def.cell);
 }
 
