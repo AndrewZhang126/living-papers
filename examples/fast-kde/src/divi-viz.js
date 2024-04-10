@@ -1,6 +1,8 @@
 import { ArticleElement } from '@living-papers/components';
 // import { hydrate } from 'uwdata-divi';
 // import { hydrate } from '/node_modules/uwdata-divi';
+import { hydrate } from '/Users/andrewzhang/Documents/DIVI/divi/dist/divi.mjs'
+
 
 export default class Divi extends ArticleElement {
 
@@ -19,6 +21,7 @@ export default class Divi extends ArticleElement {
     this.__children.forEach(d => d.addEventListener('change', function(event) {
       console.log(event.target.value);
       // Call hydrate(event.target.value);
+      hydrate(event.target.value);
     }));
   }
 
