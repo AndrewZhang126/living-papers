@@ -27,11 +27,11 @@ export default class Divi extends ArticleElement {
   initialChildNodes(nodes) {
     this.__children = nodes;
     this.__children.forEach(d => d.addEventListener('change', function(event) {
-      console.log(event.target.value);
-      hydrate(event.target.value);
-      // hydrate(event.target.value).then((result) => {
-      //   console.log(result)
-      // })
+      // console.log(event.target.value);
+      // hydrate(event.target.value);
+      hydrate(event.target.value).then((result) => {
+        console.log(result)
+      })
     }));
   }
 
