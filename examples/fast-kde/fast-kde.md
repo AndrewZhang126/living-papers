@@ -43,14 +43,36 @@ plot = Plot.plot({
 } -->
 
 
-::: divi-viz
+<!-- ::: divi-viz {mode=selection, values=["GOOG", "MSFT"]}
 ``` js
 plot = Plot.plot({
   marks: [
     Plot.lineY([1,2,3])
   ]
 });
+``` -->
+
+::: divi-viz
+``` js
+Plot.plot({
+  marks: [
+    Plot.lineY([1, 2, 3])
+  ]
+})
 ```
+:::
+
+::: divi-viz
+``` js
+Plot.plot({
+  marks: [
+    Plot.dot(cars)
+  ]
+})
+```
+:::
+
+
 <!-- ``` js
 Plot.plot({
   marks: [
@@ -58,6 +80,21 @@ Plot.plot({
   ]
 });
 ``` -->
+<!-- ``` js
+Plot.plot({
+        width: 640,
+        height: 400,
+        y: {
+            grid: true
+        },
+        marks: [
+          Plot.dot(cars, {x: "power (hp)", y: "economy (mpg)"})
+        ]
+    });
+```
+::: -->
+
+<!-- ::: divi-viz
 ``` js
 Plot.plot({
         width: 640,
@@ -70,7 +107,7 @@ Plot.plot({
         ]
     });
 ```
-:::
+::: -->
 
 <!-- 
 ::: figure
