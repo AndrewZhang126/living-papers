@@ -52,7 +52,7 @@ plot = Plot.plot({
 });
 ``` -->
 
-::: divi-viz
+<!-- ::: divi-viz
 ``` js
 Plot.plot({
   marks: [
@@ -60,15 +60,31 @@ Plot.plot({
   ]
 })
 ```
-:::
+::: -->
 
-::: divi-viz
+``` js
+stocks = [
+ {Symbol: "AAPL", Date: 1, Close: 64},
+ {Symbol: "AAPL", Date: 2, Close: 66},
+ {Symbol: "AAPL", Date: 3, Close: 70},
+ {Symbol: "AAPL", Date: 4, Close: 85},
+ {Symbol: "IBM", Date: 1, Close: 50},
+ {Symbol: "IBM", Date: 2, Close: 45},
+ {Symbol: "IBM", Date: 3, Close: 42},
+ {Symbol: "IBM", Date: 4, Close: 40}
+];
+```
+
+::: divi-viz {mode=select values=["AAPL"]}
 ``` js
 Plot.plot({
+  y: {grid: true},
+  color: {legend: true},
   marks: [
-    Plot.dot(cars)
+    Plot.ruleY([0]),
+    Plot.dot(stocks, {x: "Date", y: "Close", stroke: "Symbol"})
   ]
-})
+});
 ```
 :::
 
