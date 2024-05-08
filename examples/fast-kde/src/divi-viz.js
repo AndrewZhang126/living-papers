@@ -26,20 +26,25 @@ export default class Divi extends ArticleElement {
   initialChildNodes(nodes) {
 
     //logs ["AAPL"]
-    console.log(this.values)
-
     this.__children = nodes;
+
+    //making the call here removes typerror for undefined compared to in render
+    this.hydrateChildren()
+  }
+
+  hydrateChildren() {
     this.__children.forEach(d => d.addEventListener('change', function(event) {
       // console.log(event.target.value);
       // hydrate(event.target.value);
       hydrate(event.target.value).then((result) => {
-        console.log(result[0])
+        // console.log(result[0])
         const data = result[0].data.table._data._mark_.data
         console.log(data)
 
         //logs undefined
+        console.log(this.mode)
         console.log(this.values)
-
+        
         // this.values.forEach((value) => {
         //   for (let element of data) {
         //     if (!(Object.values(element.__inferred__data__).includes(value))) {
@@ -52,7 +57,7 @@ export default class Divi extends ArticleElement {
 
         for (let element of data) {
           if (element.__data__ === 3) {
-            console.log("test 3")
+            // console.log("test 3")
             element.__opacity__ = "0"
           }
         }
@@ -62,6 +67,9 @@ export default class Divi extends ArticleElement {
   }
 
   render() {
+    console.log('mode: ' + this.mode)
+    console.log('values: ' + this.values)
+    // this.hydrateChildren()
     return this.__children;
   }
 }
