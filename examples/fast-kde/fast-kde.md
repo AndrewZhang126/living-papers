@@ -76,7 +76,7 @@ stocks = [
 ---
 mode = 'select'
 ---
-values = [0]
+values = [1, 2]
 ```
 
 ::: divi-viz {mode=`mode` values=`values`}
@@ -141,15 +141,13 @@ plot3 = Plot.plot({
 :::  -->
 
 ::: abstract
+[Test](`values=[3, 4]`)
 Kernel density estimation (KDE) models a discrete sample of data as a continuous distribution, supporting the construction of visualizations such as violin plots, heatmaps, and contour plots.
 This paper draws on the statistics and image processing literature to survey efficient and scalable density estimation techniques for the common case of Gaussian kernel functions.
 We evaluate the accuracy and running time of these methods across multiple visualization contexts and find that the combination of linear binning and a recursive filter approximation by Deriche efficiently produces pixel-perfect estimates across a compelling range of kernel bandwidths.
 :::
 
 # Introduction
-
-<!-- [test](`mode=test`) -->
-[Test](`values=[1]`)
 Kernel density estimation (_KDE_) [@Rosenblatt:1956; @Parzen:1962] estimates a continuous probability density function for a finite sample of data.
 KDE is regularly used to visualize univariate distributions for exploratory analysis in the form of area charts or violin plots [@Hintzel:1998; @Correll:2014], providing valuable alternatives to histograms.
 In two dimensions, KDE estimates produce smoothed heatmaps that can be visualized directly as images or used to extract density isolines [@Lorensen:1987:MCA] for contour plots.

@@ -1,6 +1,7 @@
 import { ArticleElement } from '@living-papers/components';
 // import { hydrate } from 'uwdata-divi';
 // import { hydrate } from '/node_modules/uwdata-divi';
+import { select } from 'd3-selection';
 import { hydrate } from '/Users/andrewzhang/Documents/DIVI/divi/dist/divi.mjs'
 
 
@@ -33,35 +34,20 @@ export default class Divi extends ArticleElement {
   }
 
   hydrateChildren() {
+    console.log("hydrate")
+    const that = this
     this.__children.forEach(d => d.addEventListener('change', function(event) {
-      // console.log(event.target.value);
-      // hydrate(event.target.value);
       hydrate(event.target.value).then((result) => {
-        // console.log(result[0])
         const data = result[0].data.table._data._mark_.data
-        console.log(data)
-
-        //logs undefined
-        console.log(this.mode)
-        console.log(this.values)
-        
-        // this.values.forEach((value) => {
-        //   for (let element of data) {
-        //     if (!(Object.values(element.__inferred__data__).includes(value))) {
-        //       if (this.mode === 'select') {
-        //         element.__opacity__ = "0"
-        //       }
-        //     }
-        //   }
-        // })
 
         for (let element of data) {
-          if (element.__data__ === 3) {
-            // console.log("test 3")
-            element.__opacity__ = "0"
+          console.log(element)
+          if (that.values.indexOf(element.__data__) !== -1) {
+            if (that.mode === 'select') {
+              select(element).attr('opacity', 0)
+            }
           }
         }
-
       })
     }));
   }
@@ -69,6 +55,9 @@ export default class Divi extends ArticleElement {
   render() {
     console.log('mode: ' + this.mode)
     console.log('values: ' + this.values)
+    console.log(this.__children)
+
+    //casues undefined error
     // this.hydrateChildren()
     return this.__children;
   }
