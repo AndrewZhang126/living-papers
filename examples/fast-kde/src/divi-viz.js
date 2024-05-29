@@ -38,16 +38,18 @@ export default class Divi extends ArticleElement {
     const that = this
     this.__children.forEach(d => d.addEventListener('change', function(event) {
       hydrate(event.target.value).then((result) => {
-        const data = result[0].data.table._data._mark_.data
+        // const data = result[0].data.table._data._mark_.data
+        // console.log(data)
+        console.log(result)
 
-        for (let element of data) {
-          console.log(element)
-          if (that.values.indexOf(element.__data__) !== -1) {
-            if (that.mode === 'select') {
-              select(element).attr('opacity', 0)
-            }
-          }
-        }
+        // for (let element of data) {
+        //   console.log(element)
+        //   if (that.values.indexOf(element.__data__) !== -1) {
+        //     if (that.mode === 'select') {
+        //       select(element).attr('opacity', 0)
+        //     }
+        //   }
+        // }
       })
     }));
   }

@@ -149,7 +149,7 @@ We evaluate the accuracy and running time of these methods across multiple visua
 
 # Introduction
 Kernel density estimation (_KDE_) [@Rosenblatt:1956; @Parzen:1962] estimates a continuous probability density function for a finite sample of data.
-KDE is regularly used to visualize univariate distributions for exploratory analysis in the form of area charts or violin plots [@Hintzel:1998; @Correll:2014], providing valuable alternatives to histograms.
+KDE is regularly usd to visualize univariate distributions for exploratory analysis in the form of area charts or violin plots [@Hintzel:1998; @Correll:2014], providing valuable alternatives to histograms.
 In two dimensions, KDE estimates produce smoothed heatmaps that can be visualized directly as images or used to extract density isolines [@Lorensen:1987:MCA] for contour plots.
 
 To form a density estimate, each data point is modeled as a probability distribution, or _kernel_, centered at that point.
