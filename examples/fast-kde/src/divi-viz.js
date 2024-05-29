@@ -30,7 +30,7 @@ export default class Divi extends ArticleElement {
     this.__children = nodes;
 
     //making the call here removes typerror for undefined compared to in render
-    this.hydrateChildren()
+    this.hydrateChildren();
   }
 
   hydrateChildren() {
