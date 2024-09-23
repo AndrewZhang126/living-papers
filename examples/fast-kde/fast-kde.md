@@ -30,126 +30,16 @@ output:
 | Gaussian kernel density estimation for a single impulse value ($m$ = 512 bins, $\sigma$ = 0.2). Iterated uniform ("box") filters [@Wells:1986; @Gwosdek:2011] (red & dashed) underestimate the mode and overestimate the sides of the distribution. Deriche's [@Deriche:1990; @Deriche:1993] linear-time recursive filter approximation (blue) produces a pixel-perfect match to the true distribution (grey).
 :::
 
-<!-- [:divi-viz:]{filepath=figures/impulse_1d.svg} -->
-
-<!-- [:divi-viz:]{
-``` js
-plot = Plot.plot({
-  marks: [
-    Plot.lineY([1,2,3])
-  ]
-});
-``` 
-} -->
-
-
-<!-- ::: divi-viz {mode=selection, values=["GOOG", "MSFT"]}
-``` js
-plot = Plot.plot({
-  marks: [
-    Plot.lineY([1,2,3])
-  ]
-});
-``` -->
-
-<!-- ::: divi-viz
-``` js
-Plot.plot({
-  marks: [
-    Plot.lineY([1, 2, 3])
-  ]
-})
-```
-::: -->
-
-``` js
-stocks = [
- {Symbol: "AAPL", Date: 1, Close: 64},
- {Symbol: "AAPL", Date: 2, Close: 66},
- {Symbol: "AAPL", Date: 3, Close: 70},
- {Symbol: "AAPL", Date: 4, Close: 85},
- {Symbol: "IBM", Date: 1, Close: 50},
- {Symbol: "IBM", Date: 2, Close: 45},
- {Symbol: "IBM", Date: 3, Close: 42},
- {Symbol: "IBM", Date: 4, Close: 40}
-]
----
-mode = 'select'
----
-values = [1, 2]
-```
-
-::: divi-viz {mode=`mode` values=`values`}
-``` js
-Plot.plot({
-  y: {grid: true},
-  color: {legend: true},
-  marks: [
-    Plot.ruleY([0]),
-    Plot.dot(stocks, {x: "Date", y: "Close", stroke: "Symbol"})
-  ]
-});
-```
-:::
-
-
-<!-- ``` js
-Plot.plot({
-  marks: [
-    Plot.dot(cars, {x: "power (hp)", y: "economy (mpg)"})
-  ]
-});
-``` -->
-<!-- ``` js
-Plot.plot({
-        width: 640,
-        height: 400,
-        y: {
-            grid: true
-        },
-        marks: [
-          Plot.dot(cars, {x: "power (hp)", y: "economy (mpg)"})
-        ]
-    });
-```
-::: -->
-
-<!-- ::: divi-viz
-``` js
-Plot.plot({
-        width: 640,
-        height: 400,
-        y: {
-            grid: true
-        },
-        marks: [
-          Plot.dot(cars, {x: "power (hp)", y: "economy (mpg)"})
-        ]
-    });
-```
-::: -->
-
-<!-- 
-::: figure
-``` js
-plot3 = Plot.plot({
-  marks: [
-    Plot.lineY([1,2,3])
-  ]
-});
-```
-:::  -->
-
 ::: abstract
-[Test](`values=[3, 4]`)
 Kernel density estimation (KDE) models a discrete sample of data as a continuous distribution, supporting the construction of visualizations such as violin plots, heatmaps, and contour plots.
 This paper draws on the statistics and image processing literature to survey efficient and scalable density estimation techniques for the common case of Gaussian kernel functions.
 We evaluate the accuracy and running time of these methods across multiple visualization contexts and find that the combination of linear binning and a recursive filter approximation by Deriche efficiently produces pixel-perfect estimates across a compelling range of kernel bandwidths.
 :::
 
 # Introduction
+
 Kernel density estimation (_KDE_) [@Rosenblatt:1956; @Parzen:1962] estimates a continuous probability density function for a finite sample of data.
-KDE is regularly usd to visualize univariate distributions for exploratory analysis in the form of area charts or violin plots [@Hintzel:1998; @Correll:2014], providing valuable alternatives to histograms.
+KDE is regularly used to visualize univariate distributions for exploratory analysis in the form of area charts or violin plots [@Hintzel:1998; @Correll:2014], providing valuable alternatives to histograms.
 In two dimensions, KDE estimates produce smoothed heatmaps that can be visualized directly as images or used to extract density isolines [@Lorensen:1987:MCA] for contour plots.
 
 To form a density estimate, each data point is modeled as a probability distribution, or _kernel_, centered at that point.

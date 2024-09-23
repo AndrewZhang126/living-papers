@@ -1,8 +1,8 @@
 import { ArticleElement } from '@living-papers/components';
 // import { hydrate } from 'uwdata-divi';
 // import { hydrate } from '/node_modules/uwdata-divi';
-import { select } from 'd3-selection';
-import { hydrate } from '/Users/andrewzhang/Documents/DIVI/divi/dist/divi.mjs'
+// import { select } from 'd3-selection';
+import { hydrate } from '/Users/andrewzhang/Documents/DIVI/divi/dist/divi.mjs';
 
 
 export default class Divi extends ArticleElement {
@@ -38,8 +38,8 @@ export default class Divi extends ArticleElement {
     const that = this
     this.__children.forEach(d => d.addEventListener('change', function(event) {
       hydrate(event.target.value).then((result) => {
-        // const data = result[0].data.table._data._mark_.data
-        // console.log(data)
+        const data = result[0].data.table._data._mark_.data
+        console.log(data)
         console.log(result)
 
         // for (let element of data) {
@@ -55,9 +55,9 @@ export default class Divi extends ArticleElement {
   }
 
   render() {
-    console.log('mode: ' + this.mode)
-    console.log('values: ' + this.values)
-    console.log(this.__children)
+    // console.log('mode: ' + this.mode)
+    // console.log('values: ' + this.values)
+    // console.log(this.__children)
 
     //casues undefined error
     // this.hydrateChildren()

@@ -10,17 +10,5 @@
   "devDependencies": {
     "@living-papers/cli": "*",
     "mkdirp": "^2.1.6"
-  },
-  "living-papers": {
-    "components": [
-      {
-        "name": "divi-viz",
-        "file": "src/divi-viz.js"
-      }
-    ]
-  },
-  "dependencies": {
-    "d3-selection": "^3.0.0",
-    "uwdata-divi": "^0.0.0"
   }
 }

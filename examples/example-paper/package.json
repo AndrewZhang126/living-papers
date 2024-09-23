@@ -1,0 +1,26 @@
+{
+    "private": true,
+    "name": "@living-papers/example-example-paper",
+    "description": "Example Living Papers DIVI article.",
+    "repository": "uwdata/living-papers",
+    "scripts": {
+      "prebuild": "mkdirp build && cp faithful.tsv build && cp us-counties-10m.json build && cp us-presidential-election-2020.csv build",
+      "build": "lpub -o build example-paper.md"
+    },
+    "devDependencies": {
+      "@living-papers/cli": "*",
+      "mkdirp": "^2.1.6"
+    },
+    "living-papers": {
+      "components": [
+        {
+          "name": "divi-viz",
+          "file": "src/divi-viz.js"
+        }
+      ]
+    },
+    "dependencies": {
+      "d3-selection": "^3.0.0",
+      "uwdata-divi": "^0.0.0"
+    }
+}
