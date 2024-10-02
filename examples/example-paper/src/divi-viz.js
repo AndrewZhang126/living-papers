@@ -1,7 +1,7 @@
 import { ArticleElement } from '@living-papers/components';
 // import { hydrate } from 'uwdata-divi';
 // import { hydrate } from '/node_modules/uwdata-divi';
-// import { select } from 'd3-selection';
+import { selectAll } from 'd3-selection';
 import { hydrate, selectMarks, annotate } from '/Users/andrewzhang/Documents/DIVI/divi/dist/divi.mjs'
 
 
@@ -35,6 +35,8 @@ export default class Divi extends ArticleElement {
   initialChildNodes(nodes) {
 
     this.__children = nodes;
+    this.__state = null;
+    this.__svg = null;
 
     //making the call here removes typerror for undefined compared to in render
     this.hydrateChildren();
@@ -47,11 +49,17 @@ export default class Divi extends ArticleElement {
   hydrateChildren() {
     const that = this
     // console.log(this.__children)
-    this.__children.forEach(d => d.addEventListener('change', function(event) {
-      console.log(that.modes)
-      console.log(that.values)
-      hydrate(event.target.value).then((result) => {
-        const state = result[0];
+    this.__children.forEach(d => d.addEventListener('change', async function(event) {
+      if (!that.__state) {
+        that.__state = (await hydrate(event.target.value))[0];
+        that.__svg = that.__state.svg.cloneNode(true);
+      } else {
+        selectAll('.annotation-group').remove();
+        that.__state.svg = that.__svg;
+      }
+      // hydrate(this.__svg).then((result) => {
+        // const state = result[0];
+        const state = that.__state;
         that.modes.forEach((currMode, i) => {
           if (currMode === 'annotation') {
             that.values[i].forEach(currValue => {
@@ -73,7 +81,7 @@ export default class Divi extends ArticleElement {
             selectMarks(svgMarks, selectedMarks);
           }
         })
-      })
+      // })
     }));
   }
 
