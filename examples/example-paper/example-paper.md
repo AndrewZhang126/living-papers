@@ -16,7 +16,7 @@ output:
 
 
 # Scatter and Dot Plot
-``` js
+<!-- ``` js
 Plot.plot({
   marginLeft: 60,
   x: {inset: 10},
@@ -25,16 +25,21 @@ Plot.plot({
     Plot.dot(penguins, {x: "body_mass_g", y: "species", stroke: "sex"})
   ]
 })
-```
+``` -->
 ## With Divi
-[Chinstrap penguins generally have smaller body masses than Gentoo penguins](`mode1='select', values1=['Gentoo','Chinstrap']`) 
-[This Chinstrap penguin](`mode1='annotation', values1=['body mass = 4,600']`) is an outlier. 
+[Chinstrap penguins generally have smaller body masses than Gentoo penguins](`modes1=['selection'], values1=[[100,200]]`) 
+<!-- <!-- [This Chinstrap penguin](`mode1='annotation', values1=['body mass = 4,600']`) is an outlier.  -->
+<!-- [This Chinstrap penguin](`mode1='annotation', values1=['4000','body mass = 4000']`) is an outlier. -->
+[This Chinstrap penguin](`modes1=['annotation'], values1=[['5000','Chinstrap','body mass = 5000']]`) is an outlier. 
 ```js
-mode1 = 'select'
+// mode1 = 'selection'
+// ---
+// values1 = ['Adelie']
+modes1 = ['selection','annotation']
 ---
-values1 = ['Adelie']
+values1 = [[0,300],[['3000','Chinstrap','body mass = 3000'],['4000','Chinstrap','body mass = 4000']]]
 ```
-::: divi-viz {mode=`mode1` values=`values1`}
+::: divi-viz {modes=`modes1` values=`values1`}
 ``` js
 Plot.plot({
   marginLeft: 60,
@@ -48,7 +53,7 @@ Plot.plot({
 :::
 
 
-
+<!-- 
 # Histogram and Density Plot
 [Cluster of shorter ~2 min eruptions](`mode2='select', values2=['2']`)
 [Cluster of longer ~4 min eruptions](`mode2='select', values2=['4']`)
@@ -74,58 +79,17 @@ Plot.plot({
   ]
 })
 ```
-:::
+::: -->
 
-# Map and Vector Plot
+<!-- # Map and Vector Plot
 
 ``` js
 mode3 = 'select'
 ---
 values3 = ['']
-```
+``` -->
 
-
-<!-- ``` js
-population = FileAttachment("population.json").json()
-  .then((data) =>
-    data
-      .slice(1) // removes a header line
-      .map(([p, state, county]) => ({
-        state,
-        fips: `${state}${county}`,
-        population: +p
-      }))
-  )
----
-centroid = {
-  const path = d3.geoPath();
-  return feature => path.centroid(feature);
-}
----
-us = FileAttachment("counties-albers-10m.json").json()
----
-nation = topojson.feature(us, us.objects.nation)
----
-statemap = new Map(topojson.feature(us, us.objects.states).features.map(d => [d.id, d]))
----
-countymap = new Map(topojson.feature(us, us.objects.counties).features.map(d => [d.id, d]))
----
-statemesh = topojson.mesh(us, us.objects.states, (a, b) => a !== b)
----
-spike = (length, width = 7) => `M${-width / 2},0L0,${-length}L${width / 2},0`
----
-map = Plot.plot({
-  width: 975,
-  projection: "identity",
-  length: {range: [0, 200]},
-  marks: [
-    Plot.geo(nation, { fill: "#eee" }),
-    Plot.geo(statemesh, { stroke: "white" }),
-    Plot.spike(population, Plot.centroid({length: "population", geometry: ({fips}) => countymap.get(fips)}))
-  ]
-}) 
-```-->
-::: divi-viz {mode=`mode2` values=`values2`}
+<!-- ::: divi-viz {mode=`mode2` values=`values2`}
 ``` js
 election = FileAttachment("us-presidential-election-2020.csv").csv()
 ---
@@ -145,28 +109,6 @@ counties = {
   return counties;
 }
 ---
-Plot.plot({
-  projection: "albers-usa",
-  length: {type: "sqrt", transform: Math.abs},
-  marks: [
-    Plot.geo(statemesh, {strokeWidth: 0.5}),
-    Plot.geo(nation),
-    Plot.vector(
-      counties,
-      Plot.centroid({
-        anchor: "start",
-        length: (d) => d.properties.margin2020 * d.properties.votes,
-        stroke: (d) => d.properties.margin2020 > 0 ? "red" : "blue",
-        rotate: (d) => d.properties.margin2020 > 0 ? 60 : -60
-      })
-    )
-  ]
-})
-```
-:::
-
-<!-- ::: divi-viz {mode=`mode3` values=`values3`}
-```js
 Plot.plot({
   projection: "albers-usa",
   length: {type: "sqrt", transform: Math.abs},

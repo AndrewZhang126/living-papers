@@ -10,7 +10,7 @@ export default class Divi extends ArticleElement {
   static get properties() {
     return {
       //interaction type
-      mode: {type: String},
+      modes: {type: Array},
 
       //values to manipulate
       values: {type: Array}
@@ -19,57 +19,72 @@ export default class Divi extends ArticleElement {
 
   constructor() {
     super();
-    this.mode = "";
+    this.modes = [];
     this.values = [];
   }
+
+  // update(changedProperties) {
+  //   console.log(changedProperties)
+  //   // changedProperties.forEach((_, key) => {
+  //   //   this._sim[key](this[key]);
+  //   // });
+  //   this.__children.forEach(d => d.dispatchEvent(new Event('change')))
+  // }
 
   // gather svg from rendered child cell-view nodes
   initialChildNodes(nodes) {
 
-    //logs ["AAPL"]
     this.__children = nodes;
 
     //making the call here removes typerror for undefined compared to in render
     this.hydrateChildren();
   }
 
+
+
+  //inferred data is incorrect
+  //clear marks? that way can do multiple handlers 
   hydrateChildren() {
-    console.log("hydrate")
-    // const that = this
+    const that = this
+    // console.log(this.__children)
     this.__children.forEach(d => d.addEventListener('change', function(event) {
+      console.log(that.modes)
+      console.log(that.values)
       hydrate(event.target.value).then((result) => {
-        /*
-        -- selectMarks API --
-        */
         const state = result[0];
-        const { svgMarks } = state;
-        const selectedMarks = [svgMarks[0]]; // Select random mark
-        selectMarks(svgMarks, selectedMarks); // Apply selection
-
-        /*
-        -- annotate API --
-        */
-       annotate(state, 3000, 'Chinstrap', 'annotation'); //
-
-        // for (let element of data) {
-        //   console.log(element)
-        //   if (that.values.indexOf(element.__data__) !== -1) {
-        //     if (that.mode === 'select') {
-        //       select(element).attr('opacity', 0)
-        //     }
-        //   }
-        // }
+        that.modes.forEach((currMode, i) => {
+          if (currMode === 'annotation') {
+            that.values[i].forEach(currValue => {
+              annotate(state, currValue[0], currValue[1], currValue[2]);
+            })
+          }
+          else if (currMode === 'selection') {
+            let { svgMarks } = state;
+            let selectedMarks = [];
+            console.log(svgMarks)
+            svgMarks.forEach((d, j) => 
+              {
+                if (that.values[i].includes(j)) {
+                  selectedMarks.push(d)
+                  console.log(j)
+                }
+              }
+            )
+            selectMarks(svgMarks, selectedMarks);
+          }
+        })
       })
     }));
   }
 
   render() {
-    console.log('mode: ' + this.mode)
-    console.log('values: ' + this.values)
-    console.log(this.__children)
+    // console.log('mode: ' + this.mode)
+    // console.log('values: ' + this.values)
+    // console.log(this.__children)
 
     //casues undefined error
     // this.hydrateChildren()
+    this.__children.forEach(d => d.dispatchEvent(new Event('change')))
     return this.__children;
   }
 }
