@@ -38,9 +38,6 @@ export default class Divi extends ArticleElement {
     // const that = this
     this.__children.forEach(d => d.addEventListener('change', function(event) {
       hydrate(event.target.value).then((result) => {
-        // const data = result[0].data.table._data._mark_.data
-        // console.log(data)
-
         /*
         -- selectMarks API --
         */
@@ -52,7 +49,7 @@ export default class Divi extends ArticleElement {
         /*
         -- annotate API --
         */
-       annotate(state, 3000, 'Chinstrap', 'annotation'); // Annotate in dataspace: (body_mass_g = 3000, species = Chinstrap)
+       annotate(state, 3000, 'Chinstrap', 'annotation'); //
 
         // for (let element of data) {
         //   console.log(element)
@@ -67,9 +64,9 @@ export default class Divi extends ArticleElement {
   }
 
   render() {
-    // console.log('mode: ' + this.mode)
-    // console.log('values: ' + this.values)
-    // console.log(this.__children)
+    console.log('mode: ' + this.mode)
+    console.log('values: ' + this.values)
+    console.log(this.__children)
 
     //casues undefined error
     // this.hydrateChildren()
