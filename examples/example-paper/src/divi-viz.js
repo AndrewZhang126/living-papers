@@ -2,7 +2,7 @@ import { ArticleElement } from '@living-papers/components';
 // import { hydrate } from 'uwdata-divi';
 // import { hydrate } from '/node_modules/uwdata-divi';
 // import { select } from 'd3-selection';
-import { hydrate } from '/Users/andrewzhang/Documents/DIVI/divi/dist/divi.mjs';
+import { hydrate, selectMarks, annotate } from '/Users/andrewzhang/Documents/DIVI/divi/dist/divi.mjs'
 
 
 export default class Divi extends ArticleElement {
@@ -35,12 +35,24 @@ export default class Divi extends ArticleElement {
 
   hydrateChildren() {
     console.log("hydrate")
-    const that = this
+    // const that = this
     this.__children.forEach(d => d.addEventListener('change', function(event) {
       hydrate(event.target.value).then((result) => {
-        const data = result[0].data.table._data._mark_.data
-        console.log(data)
-        console.log(result)
+        // const data = result[0].data.table._data._mark_.data
+        // console.log(data)
+
+        /*
+        -- selectMarks API --
+        */
+        const state = result[0];
+        const { svgMarks } = state;
+        const selectedMarks = [svgMarks[0]]; // Select random mark
+        selectMarks(svgMarks, selectedMarks); // Apply selection
+
+        /*
+        -- annotate API --
+        */
+       annotate(state, 3000, 'Chinstrap', 'annotation'); // Annotate in dataspace: (body_mass_g = 3000, species = Chinstrap)
 
         // for (let element of data) {
         //   console.log(element)
