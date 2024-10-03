@@ -22,5 +22,8 @@
   "workspaces": [
     "packages/*",
     "templates/*"
-  ]
+  ],
+  "dependencies": {
+    "d3-selection": "^3.0.0"
+  }
 }

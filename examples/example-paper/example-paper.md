@@ -27,19 +27,22 @@ Plot.plot({
 })
 ``` -->
 ## With Divi
-[Chinstrap penguins generally have smaller body masses than Gentoo penguins](`modes1=['selection'], values1=[[100,200]]`) 
-<!-- <!-- [This Chinstrap penguin](`mode1='annotation', values1=['body mass = 4,600']`) is an outlier.  -->
-<!-- [This Chinstrap penguin](`mode1='annotation', values1=['4000','body mass = 4000']`) is an outlier. -->
-[This Chinstrap penguin](`modes1=['annotation'], values1=[['5000','Chinstrap','body mass = 5000']]`) is an outlier. 
+[Chinstrap penguins generally have smaller body masses than Gentoo penguins](`selection1=chinstraps`).
+
+[This Chinstrap penguin](`annotation1=[[4000,'Chinstrap','body mass = 4000']]`) is an outlier. 
+
+[Adelie penguins have a large range of body mass values](`selection1=adelie, annotation1=[[5000,'Adelie','Adelie']]`).
 ```js
-// mode1 = 'selection'
-// ---
-// values1 = ['Adelie']
-modes1 = ['selection','annotation']
+selection1 = []
 ---
-values1 = [[0,300],[['3000','Chinstrap','body mass = 3000'],['4000','Chinstrap','body mass = 4000']]]
+annotation1 = []
+---
+chinstraps = Array.from({length: 210 - 160 + 1}, (v, k) => k + 160);
+---
+adelie = Array.from({length: 100 - 0 + 1}, (v, k) => k + 0);
 ```
-::: divi-viz {modes=`modes1` values=`values1`}
+<!-- ::: divi-viz {modes=`modes1` values=`values1`} -->
+::: divi-viz {selection=`selection1` annotation=`annotation1`}
 ``` js
 Plot.plot({
   marginLeft: 60,

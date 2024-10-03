@@ -2,7 +2,7 @@ import { ArticleElement } from '@living-papers/components';
 // import { hydrate } from 'uwdata-divi';
 // import { hydrate } from '/node_modules/uwdata-divi';
 import { selectAll } from 'd3-selection';
-import { hydrate, selectMarks, annotate } from '/Users/andrewzhang/Documents/DIVI/divi/dist/divi.mjs'
+import { hydrate, selectMarks, selectAllMarks, annotate } from '/Users/andrewzhang/Documents/DIVI/divi/dist/divi.mjs'
 
 
 export default class Divi extends ArticleElement {
@@ -12,8 +12,10 @@ export default class Divi extends ArticleElement {
       //interaction type
       modes: {type: Array},
 
-      //values to manipulate
-      values: {type: Array}
+      // values to manipulate
+      values: {type: Array},
+      selection: {type: Array},
+      annotation: {type: Array},
     };
   }
 
@@ -21,6 +23,12 @@ export default class Divi extends ArticleElement {
     super();
     this.modes = [];
     this.values = [];
+
+    //[[x1, y1], [x2, y2]]
+    this.selection = [];
+
+    //[[x1, y1, note], [x2, y2, note]]
+    this.annotation = [];
   }
 
   // update(changedProperties) {
@@ -42,8 +50,6 @@ export default class Divi extends ArticleElement {
     this.hydrateChildren();
   }
 
-
-
   //inferred data is incorrect
   //clear marks? that way can do multiple handlers 
   hydrateChildren() {
@@ -59,29 +65,33 @@ export default class Divi extends ArticleElement {
       }
       // hydrate(this.__svg).then((result) => {
         // const state = result[0];
+        console.log(that.selection)
+        console.log(that.annotation)
         const state = that.__state;
-        that.modes.forEach((currMode, i) => {
-          if (currMode === 'annotation') {
-            that.values[i].forEach(currValue => {
-              annotate(state, currValue[0], currValue[1], currValue[2]);
-            })
+        let { svgMarks } = state;
+        selectAllMarks(svgMarks);
+        if (that.annotation.length > 0) {
+          that.annotation.forEach(curr => {
+            const [x, y, value] = curr;
+            console.log(x, y, value)
+            annotate(state, x, y, value);
+          });
+
+        }
+        if (that.selection.length > 0) {
+          let selectedMarks = [];
+        svgMarks.forEach((d, j) => 
+          {
+            if (that.selection.includes(j)) {
+              selectedMarks.push(d)
+              console.log(j)
+            }
           }
-          else if (currMode === 'selection') {
-            let { svgMarks } = state;
-            let selectedMarks = [];
-            console.log(svgMarks)
-            svgMarks.forEach((d, j) => 
-              {
-                if (that.values[i].includes(j)) {
-                  selectedMarks.push(d)
-                  console.log(j)
-                }
-              }
-            )
-            selectMarks(svgMarks, selectedMarks);
-          }
-        })
-      // })
+        )
+        console.log(selectedMarks)
+        selectMarks(svgMarks, selectedMarks);
+
+        }
     }));
   }
 
