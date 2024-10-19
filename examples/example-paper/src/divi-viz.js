@@ -31,6 +31,7 @@ export default class Divi extends ArticleElement {
     //[[x1, y1, note], [x2, y2, note]]
     this.annotation = [];
 
+    //[[variable, min, max]]
     this.filter = [];
   }
 
