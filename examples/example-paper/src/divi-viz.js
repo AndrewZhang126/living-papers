@@ -10,25 +10,28 @@ export default class Divi extends ArticleElement {
   static get properties() {
     return {
       //interaction type
-      modes: {type: Array},
+      // modes: {type: Array},
 
-      // values to manipulate
-      values: {type: Array},
+      // // values to manipulate
+      // values: {type: Array},
       selection: {type: Array},
+      filter: {type: Array},
       annotation: {type: Array},
     };
   }
 
   constructor() {
     super();
-    this.modes = [];
-    this.values = [];
+    // this.modes = [];
+    // this.values = [];
 
     //[[x1, y1], [x2, y2]]
     this.selection = [];
 
     //[[x1, y1, note], [x2, y2, note]]
     this.annotation = [];
+
+    this.filter = [];
   }
 
   // update(changedProperties) {
@@ -65,9 +68,8 @@ export default class Divi extends ArticleElement {
       }
       // hydrate(this.__svg).then((result) => {
         // const state = result[0];
-        console.log(that.selection)
-        console.log(that.annotation)
         const state = that.__state;
+        console.log(state)
         let { svgMarks } = state;
         selectAllMarks(svgMarks);
         if (that.annotation.length > 0) {
@@ -78,16 +80,31 @@ export default class Divi extends ArticleElement {
           });
 
         }
-        if (that.selection.length > 0) {
+        if (that.selection.length > 0 || that.filter.length > 0) {
           let selectedMarks = [];
-        svgMarks.forEach((d, j) => 
-          {
-            if (that.selection.includes(j)) {
-              selectedMarks.push(d)
-              console.log(j)
-            }
-          }
-        )
+          svgMarks.forEach(d => {
+            const infer = d._inferred_data_;
+            that.selection.forEach(s => {
+              if (infer[s[0]] === s[1]) {
+                selectedMarks.push(d)
+              }
+            })
+            that.filter.forEach(f => {
+              if (infer[f[0]] >= f[1] && infer[f[0]] <= f[2]) {
+                console.log('hello')
+                selectedMarks.push(d)
+              }
+            })
+
+          })
+        // svgMarks.forEach((d, j) => 
+        //   {
+        //     if (that.selection.includes(j)) {
+        //       selectedMarks.push(d)
+        //       console.log(j)
+        //     }
+        //   }
+        // )
         console.log(selectedMarks)
         selectMarks(svgMarks, selectedMarks);
 

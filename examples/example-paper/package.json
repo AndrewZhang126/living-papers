@@ -4,8 +4,10 @@
     "description": "Example Living Papers DIVI article.",
     "repository": "uwdata/living-papers",
     "scripts": {
-      "prebuild": "mkdirp build && cp faithful.tsv build && cp us-counties-10m.json build && cp us-presidential-election-2020.csv build",
-      "build": "lpub -o build example-paper.md"
+      "prebuild": "mkdirp build-penguins && mkdirp build-olympians && mkdirp build-faithful && cp faithful.tsv build-faithful",
+      "build-penguins": "lpub -o build-penguins penguins.md",
+      "build-faithful": "lpub -o build-faithful faithful.md",
+      "build-olympians": "lpub -o build-olympians olympians.md"
     },
     "devDependencies": {
       "@living-papers/cli": "*",
