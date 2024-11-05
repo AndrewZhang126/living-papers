@@ -20,28 +20,32 @@ output:
 
 # Eruption Analysis
 
-[Cluster of shorter ~2 min eruptions](`filter2=[['eruptions →',0,1]], annotation2=[[2,85,'2 minute eruptions']]`)
+[Cluster of shorter ~2 min eruptions](`filter1=[['eruptions',0,2.5]], filter2=[['eruptions',0,2.5]]`)
 
-[Cluster of shorter ~4 min eruptions](`filter2=[['eruptions →',-2,-1]], annotation2=[[4.5,50,'4 minute eruptions']]`)
+[It seems the most frequent of the shorter eruptiosn lasts around 1.8 to 1.9 minutes](`filter1=[['eruptions',1.8,1.9]]`)
+
+[Cluster of shorter ~4 min eruptions](`filter1=[['eruptions',3.5,5.5]]`)
+
+[It seems the most frequent of the shorter eruptiosn lasts around 4.5 to 4.6 minutes](`filter1=[['eruptions',4.5,4.6]]`)
+
 ```js
+filter1 = []
+---
+annotation1 = []
+---
 filter2 = []
----
-annotation2 = []
----
-selection3 = []
----
-annotation3 = []
 ---
 faithful = FileAttachment('faithful.tsv').tsv({ typed: true })
 ---
 bandwidth = 20
 ```
-::: divi-viz {filter=`filter2` annotation=`annotation2`}
+::: divi-viz {filter=`filter1` annotation=`annotation1`}
 ``` js
 Plot.plot({
-  x: { domain: [1.5, 5.5] },
   width: 650,
   inset: 20,
+  x: {label: "eruptions", domain: [1.5, 5.5]},
+  y: {label: "waiting"},
   marks: [
     Plot.density(faithful, {x: "eruptions", y: "waiting", stroke: "steelblue", strokeWidth: 0.25, bandwidth}),
     Plot.density(faithful, {x: "eruptions", y: "waiting", stroke: "steelblue", thresholds: 4, bandwidth}),
@@ -51,12 +55,12 @@ Plot.plot({
 ```
 :::
 
-::: divi-viz {selection=`selection3` annotation=`annotation3`}
+::: divi-viz {filter=`filter1`}
 ``` js
 Plot.plot({
   width: 650,
   height: 100,
-  x: { domain: [1.5, 5.5], inset: 20 },
+  x: { label: "eruptions", domain: [1.5, 5.5], inset: 20 },
   marks: [
     Plot.rectY(faithful, Plot.binX({y: "count", thresholds: 25}, {x: "eruptions", "fill": "steelblue"}))
   ]

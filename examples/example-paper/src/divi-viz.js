@@ -32,6 +32,7 @@ export default class Divi extends ArticleElement {
     this.annotation = [];
 
     //[[variable, min, max]]
+    // rename brush
     this.filter = [];
   }
 
@@ -61,7 +62,7 @@ export default class Divi extends ArticleElement {
     // console.log(this.__children)
     this.__children.forEach(d => d.addEventListener('change', async function(event) {
       if (!that.__state) {
-        that.__state = (await hydrate(event.target.value))[0];
+        that.__state = (await hydrate(event.target.value, ))[0];
         that.__svg = that.__state.svg.cloneNode(true);
       } else {
         selectAll('.annotation-group').remove();
@@ -79,20 +80,20 @@ export default class Divi extends ArticleElement {
             console.log(x, y, value)
             annotate(state, x, y, value);
           });
-
         }
         if (that.selection.length > 0 || that.filter.length > 0) {
           let selectedMarks = [];
           svgMarks.forEach(d => {
             const infer = d._inferred_data_;
             that.selection.forEach(s => {
-              if (infer[s[0]] === s[1]) {
+              if (verifySelection(infer, s)) {
                 selectedMarks.push(d)
               }
             })
             that.filter.forEach(f => {
+              console.log(infer)
+              console.log(f[0])
               if (infer[f[0]] >= f[1] && infer[f[0]] <= f[2]) {
-                console.log('hello')
                 selectedMarks.push(d)
               }
             })
@@ -113,6 +114,11 @@ export default class Divi extends ArticleElement {
     }));
   }
 
+
+  // isNumber(x) {
+  // }
+
+
   render() {
     // console.log('mode: ' + this.mode)
     // console.log('values: ' + this.values)
@@ -123,4 +129,44 @@ export default class Divi extends ArticleElement {
     this.__children.forEach(d => d.dispatchEvent(new Event('change')))
     return this.__children;
   }
+}
+
+function verifySelection(o1, o2) {
+  for (const [k, v] of Object.entries(o1)) {
+    const v2 = o2[k];
+    if (typeof v === 'number') {
+      let decimals = 0;
+      if (v2 % 1 != 0) {
+        decimals = v2.toString().split('.')[1].length || 0;
+      }
+      // console.log(typeof x1.toFixed(decimals))
+      // console.log(typeof x2)
+      if (Number(v.toFixed(decimals)) !== v2) {
+        return false;
+      }
+    }
+    else {
+      if (v !== v2) {
+        return false;
+      }
+    }
+  }
+  return true;
+
+  // if (typeof x1 === 'number') {
+  //   let decimals = 0;
+  //   if (x2 % 1 != 0) {
+  //     decimals = x2.toString().split('.')[1].length || 0;
+  //   }
+  //   console.log(typeof x1.toFixed(decimals))
+  //   console.log(typeof x2)
+  //   if (Number(x1.toFixed(decimals)) === x2) {
+  //     console.log("bob")
+  //     return true;
+  //   }
+  //   return false;
+  // }
+  // else {
+  //   return x1 === x2;
+  // }
 }

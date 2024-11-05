@@ -20,22 +20,36 @@ output:
 a lot of interestng analysis to be done. 
 
 # Analysis of Athletes
-``` js
-filter4 = []
+``` js {hide=true}
+olympiansSubset = olympians.slice(0, 500)
 ---
-annotation4 = []
+selection1 = []
+---
+filter = []
+---
+annotation = []
+// ---
+// spanish = olympiansSubset.filter(x => x.nationality === 'ESP');
 ```
 
+``` js
+JSON.stringify(olympiansSubset[0])
+```
 
 ::: divi-viz {}
 ``` js
-Plot.dot(olympians, {
-  x: "weight",
-  y: "height",
-}).plot()
+Plot.plot({
+  grid: true,
+  x: {label: "height"},
+  y: {label: "weight"},
+  marks: [
+    Plot.dot(olympiansSubset, {x: "height", y: "weight"})
+  ]
+})
 ```
 :::
 
+<!-- [Spain](`selection1=spanish`) -->
 Select by countries, sports
 
 # Conclusion
