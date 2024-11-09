@@ -14,7 +14,7 @@ export default class Divi extends ArticleElement {
 
       // // values to manipulate
       // values: {type: Array},
-      selection: {type: Array},
+      simpleFilter: {type: Array},
       filter: {type: Array},
       annotation: {type: Array},
     };
@@ -26,14 +26,14 @@ export default class Divi extends ArticleElement {
     // this.values = [];
 
     //[[x1, y1], [x2, y2]]
-    this.selection = [];
+    this.filter = [];
 
     //[[x1, y1, note], [x2, y2, note]]
     this.annotation = [];
 
     //[[variable, min, max]]
     // rename brush
-    this.filter = [];
+    this.simpleFilter = [];
   }
 
   // update(changedProperties) {
@@ -81,16 +81,16 @@ export default class Divi extends ArticleElement {
             annotate(state, x, y, value);
           });
         }
-        if (that.selection.length > 0 || that.filter.length > 0) {
+        if (that.filter.length > 0 || that.simpleFilter.length > 0) {
           let selectedMarks = [];
           svgMarks.forEach(d => {
             const infer = d._inferred_data_;
-            that.selection.forEach(s => {
+            that.filter.forEach(s => {
               if (verifySelection(infer, s)) {
                 selectedMarks.push(d)
               }
             })
-            that.filter.forEach(f => {
+            that.simpleFilter.forEach(f => {
               console.log(infer)
               console.log(f[0])
               if (infer[f[0]] >= f[1] && infer[f[0]] <= f[2]) {

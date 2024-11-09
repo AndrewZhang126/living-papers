@@ -1,5 +1,5 @@
 ---
-title: Example Living Papers DIVI
+title: Analysis of Athletes from the 2016 Olympic Games
 author:
   - name: Andrew Zhang
     email: azhang26@uw.edu
@@ -15,26 +15,24 @@ output:
 ---
 
 # Background
-
-[This data](https://github.com/flother/rio2016) is gathered from the official website of the 2016 Olympic Games in Rio. This contains data related to every athlete and their characteristics, such as weight, height, nationality, etc. As such, there can be
-a lot of interestng analysis to be done. 
+The official website of the 2016 Olympic Games in Rio [@olympians] gathered data for every athlete and their characteristics, such as weight, height, nationality, etc. As such, there can be a lot of interestng analysis to be done on this dataset.
 
 # Analysis of Athletes
 ``` js {hide=true}
 olympiansSubset = olympians.slice(0, 500)
 ---
-selection1 = []
----
-filter = []
----
-annotation = []
-// ---
-// spanish = olympiansSubset.filter(x => x.nationality === 'ESP');
+filterList = [];
+//You may want create a new list here for Spanish athletes
 ```
 
-``` js
-JSON.stringify(olympiansSubset[0])
-```
+
+We would like to filter the data:
+
+- By athletes between 2 and 2.5 meters tall using `simpleFilter`. Modify `filterList` and the `divi-viz` component paramenters so that the change shows when clicking [here](`filterList=[]`)
+
+- By athletes only from Spain using `filter` (hint: the dataset has a `nationality` attribute for each athlete and Spain is denoted as 'ESP'). Again, modify `filterList` and the `divi-viz` component paramenters so that the change shows when clicking [here](`filterList=[]`)
+
+- By something of your choice. You can find more data attributes from the website [@olympians].
 
 ::: divi-viz {}
 ``` js
@@ -49,7 +47,10 @@ Plot.plot({
 ```
 :::
 
-<!-- [Spain](`selection1=spanish`) -->
-Select by countries, sports
-
-# Conclusion
+~~~ bibliography
+@misc{olympians,
+  title = {2016 Olympic Games Data},
+  year = {2024},
+  url = {https://github.com/flother/rio2016}
+}
+~~~
