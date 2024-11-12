@@ -12,7 +12,7 @@ For Olympians article
 There are two parameters that `divi-viz` takes:
 - `simpleFilter : List[List[]]` is for filtering on attributes defined within the plot. It is a list of lists, each list is either of the form [`attribute`, `minValue`, `maxValue`] to filter by a range of values or [`attribute`, `value`] to filter by specific values
 
-- `simpleFilter : List[Object]` is for filtering on attributes not defined within the plot. It is a list of Objects, which can be created by performing standard filtering in JavaScript on the dataset using the `filter` method
+- `filter : List[Object]` is for filtering on attributes not defined within the plot. It is a list of Objects, which can be created by performing standard filtering in JavaScript on the dataset using the `filter` method
 
 A typical workflow is to
 1. initialize a list that will represent the interactions to be performed
@@ -20,6 +20,7 @@ A typical workflow is to
 3. If using filter and not simpleFilter, use JavaScript to perform filtering
 3. Use inline syntax to set initialized list to new list to show changes
 
+# SimpleFilter Example
 Here is an example using simpleFilter:
 Suppose we have a dataset of Objects with attributes `height`, `width`, `weight`. We create a scatterplot of height and weight using `divi-viz` and we want to filter by objects with height between 10 and 20. We would do the following:
 
@@ -43,6 +44,8 @@ Finally use the inline syntax to show the changes
 ```
 [Click here to show changes](`simpleFilter1=[['height,10,20']]`)
 ```
+
+# Filter Example
 
 Here is an example using filter:
 Suppose on the same dataset we want to filter by objects with weight between 3 and 5. Since our chart does not contain the weight attribute we would need to use filter instead of simpleFilter. We would do the following:
