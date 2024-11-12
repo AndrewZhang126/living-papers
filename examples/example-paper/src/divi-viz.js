@@ -91,10 +91,25 @@ export default class Divi extends ArticleElement {
               }
             })
             that.simpleFilter.forEach(f => {
-              console.log(infer)
-              console.log(f[0])
-              if (infer[f[0]] >= f[1] && infer[f[0]] <= f[2]) {
-                selectedMarks.push(d)
+              if (f.length === 2) {
+                console.log(f)
+                console.log(infer[f[0]])
+                console.log(f[1])
+                if (typeof f[1] === 'number') {
+                  if (compareNumbers(infer[f[0]], f[1])) {
+                    selectedMarks.push(d)
+                  }
+                }
+                else {
+                  if (infer[f[0]] === f[1]) {
+                    selectedMarks.push(d)
+                  }
+                }
+              }
+              else {
+                if (infer[f[0]] >= f[1] && infer[f[0]] <= f[2]) {
+                  selectedMarks.push(d)
+                }
               }
             })
 
@@ -135,13 +150,16 @@ function verifySelection(o1, o2) {
   for (const [k, v] of Object.entries(o1)) {
     const v2 = o2[k];
     if (typeof v === 'number') {
-      let decimals = 0;
-      if (v2 % 1 != 0) {
-        decimals = v2.toString().split('.')[1].length || 0;
-      }
-      // console.log(typeof x1.toFixed(decimals))
-      // console.log(typeof x2)
-      if (Number(v.toFixed(decimals)) !== v2) {
+      // let decimals = 0;
+      // if (v2 % 1 != 0) {
+      //   decimals = v2.toString().split('.')[1].length || 0;
+      // }
+      // // console.log(typeof x1.toFixed(decimals))
+      // // console.log(typeof x2)
+      // if (Number(v.toFixed(decimals)) !== v2) {
+      //   return false;
+      // }
+      if (!compareNumbers(v, v2)) {
         return false;
       }
     }
@@ -152,7 +170,6 @@ function verifySelection(o1, o2) {
     }
   }
   return true;
-
   // if (typeof x1 === 'number') {
   //   let decimals = 0;
   //   if (x2 % 1 != 0) {
@@ -169,4 +186,18 @@ function verifySelection(o1, o2) {
   // else {
   //   return x1 === x2;
   // }
+}
+
+function compareNumbers(n1, n2) {
+  let decimals = 0;
+    if (n2 % 1 != 0) {
+      decimals = n2.toString().split('.')[1].length || 0;
+    }
+    // console.log(typeof x1.toFixed(decimals))
+    // console.log(typeof x2)
+    if (Number(n1.toFixed(decimals)) !== n2) {
+      return false;
+    }
+    return true
+
 }
