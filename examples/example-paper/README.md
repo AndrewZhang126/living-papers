@@ -22,7 +22,7 @@ A typical workflow is to
 
 # SimpleFilter Example
 Here is an example using `simpleFilter`:
-Suppose we have a dataset of Objects with attributes `height`, `width`, `weight`. We create a scatterplot of height and weight using `divi-viz` and we want to filter by objects with height between 10 and 20. We would do the following:
+Suppose we have a dataset called `data` of Objects with attributes `height`, `width`, `weight`. We create a scatterplot of height and weight using `divi-viz` and we want to filter by objects with height between 10 and 20. We would do the following:
 
 First define a list:
 ````
@@ -35,7 +35,13 @@ Then create the component with the parameter
 ````
 ::: divi-viz {simpleFilter=`simpleFilter1`}
 ``` js
-Plot.plot(data)
+Plot.plot({
+  x: {label: "height"},
+  y: {label: "weight"},
+  marks: [
+    Plot.dot(data, {x: "height", y: "weight"})
+  ]
+})
 ```
 :::
 ````
@@ -61,7 +67,13 @@ Next create the component with the parameter
 ````
 ::: divi-viz {filter=`filter1`}
 ``` js
-Plot.plot(data)
+Plot.plot({
+  x: {label: "height"},
+  y: {label: "weight"},
+  marks: [
+    Plot.dot(data, {x: "height", y: "weight"})
+  ]
+})
 ```
 :::
 ````
