@@ -21,20 +21,20 @@ The official website of the 2016 Olympic Games in Rio [@olympians] gathered data
 ``` js {hide=true}
 olympiansSubset = olympians.slice(0, 500)
 ---
-simpleFilter1 = [];
+simpleFilter1 = []
 ---
-filter1 = [];
+filter1 = []
 ---
-nationalityFilter = olympiansSubset.filter(x => x.nationality === 'ESP');
+nationality = olympians.filter((x) => x.nationality === "ESP")
 //You may want create a new list here for Spanish athletes
 ```
 
 
 We would like to filter the data:
 
-- By athletes between 2 and 2.5 meters tall using `simpleFilter`. Modify `filterList` and the `divi-viz` component paramenters so that the change shows when clicking [here](`simpleFilter1=[['height',2,2.5]]`)
+- By athletes between 2 and 2.5 meters tall using `simpleFilter`. The change should show when clicking  [here](`simpleFilter1=[['height',2,2.5]]`).
 
-- By athletes only from Spain using `filter` (hint: the dataset has a `nationality` attribute for each athlete and Spain is denoted as 'ESP'). Again, modify `filterList` and the `divi-viz` component paramenters so that the change shows when clicking [here](`filter1=nationalityFilter`)
+- By athletes only from Spain using `filter` (hint: the dataset has a `nationality` attribute for each athlete and Spain is denoted as 'ESP'). The change should show when clicking [ESP](`filter1=nationality`);
 
 - By something of your choice. You can find more data attributes from the website [@olympians].
 

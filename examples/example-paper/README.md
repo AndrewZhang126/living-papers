@@ -42,7 +42,7 @@ Plot.plot(data)
 
 Finally use the inline syntax to show the changes
 ```
-[Click here to show changes](`simpleFilter1=[['height,10,20']]`)
+[Click here to show changes](`simpleFilter1=[['height',10,20]]`)
 ```
 
 # Filter Example
