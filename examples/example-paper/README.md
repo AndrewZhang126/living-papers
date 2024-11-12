@@ -17,11 +17,11 @@ There are two parameters that `divi-viz` takes:
 A typical workflow is to
 1. initialize a list that will represent the interactions to be performed
 2. create the `divi-viz` component with the desired parameters and chart
-3. If using filter and not simpleFilter, use JavaScript to perform filtering
+3. If using `filter` and not `simpleFilter`, use JavaScript to perform filtering
 3. Use inline syntax to set initialized list to new list to show changes
 
 # SimpleFilter Example
-Here is an example using simpleFilter:
+Here is an example using `simpleFilter`:
 Suppose we have a dataset of Objects with attributes `height`, `width`, `weight`. We create a scatterplot of height and weight using `divi-viz` and we want to filter by objects with height between 10 and 20. We would do the following:
 
 First define a list:
@@ -47,8 +47,8 @@ Finally use the inline syntax to show the changes
 
 # Filter Example
 
-Here is an example using filter:
-Suppose on the same dataset we want to filter by objects with weight between 3 and 5. Since our chart does not contain the weight attribute we would need to use filter instead of simpleFilter. We would do the following:
+Here is an example using `filter`:
+Suppose on the same dataset we want to filter by objects with weight between 3 and 5. Since our chart does not contain the weight attribute we would need to use `filter` instead of `simpleFilter`. We would do the following:
 
 First initialize a list:
 ````
