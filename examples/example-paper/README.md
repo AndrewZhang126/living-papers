@@ -24,49 +24,53 @@ Here is an example using simpleFilter:
 Suppose we have a dataset of Objects with attributes `height`, `width`, `weight`. We create a scatterplot of height and weight using `divi-viz` and we want to filter by objects with height between 10 and 20. We would do the following:
 
 First define a list:
-```
+````
 ``` js 
 simpleFilter1 = []
 ```
-```
+````
 
 Then create the component with the parameter
-```
+````
 ::: divi-viz {simpleFilter=`simpleFilter1`}
 ``` js
 Plot.plot(data)
 ```
 :::
-```
+````
 
 Finally use the inline syntax to show the changes
-`[Click here to show changes](`simpleFilter1=[['height,10,20']]`)`
+```
+[Click here to show changes](`simpleFilter1=[['height,10,20']]`)
+```
 
 Here is an example using filter:
 Suppose on the same dataset we want to filter by objects with weight between 3 and 5. Since our chart does not contain the weight attribute we would need to use filter instead of simpleFilter. We would do the following:
 
 First initialize a list:
-```
+````
 ``` js 
 filter1 = []
 ```
-```
+````
 
 Next create the component with the parameter
-```
+````
 ::: divi-viz {filter=`filter1`}
 ``` js
 Plot.plot(data)
 ```
 :::
-```
+````
 
 Then define the filtered list based on weight:
-```
+````
 ``` js 
 filteredOnWeight = data.filter(x => x.weight >= 3 && x.weight <= 5);
 ```
-```
+````
 
 Finally use the inline syntax to show the changes
-`[Click here to show changes](`filter1=filteredOnWeight`)`
+```
+[Click here to show changes](`filter1=filteredOnWeight`)
+```
