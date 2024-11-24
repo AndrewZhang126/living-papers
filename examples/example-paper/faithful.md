@@ -23,8 +23,6 @@ We demonstrate two visualizations: the first is a scatterplot of the length of t
 
 First we can examine the shorter [~2 minute eruptions](`simpleFilter1=[['eruptions',0,2.5]]`). Notice that the most frequent of these shorter eruptions lasts around [1.8 to 1.9 minutes](`simpleFilter1=[['eruptions',1.8,1.9]]`). We can then examine the longer [~4 min eruptions](`simpleFilter1=[['eruptions',3.5,5.5]]`). It seems most frequent of these longer eruptiosn lasts around [4.5 to 4.6 minutes](`simpleFilter1=[['eruptions',4.5,4.6]]`)
 
-[test](`simpleFilter1=[['eruptions',4.250]]`)
-
 ```js
 simpleFilter1 = []
 ---

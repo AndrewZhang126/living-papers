@@ -54,7 +54,7 @@ Finally use the inline syntax to show the changes
 # Filter Example
 
 Here is an example using `filter`:
-Suppose on the same dataset we want to filter by objects with weight between 3 and 5. Since our chart does not contain the weight attribute we would need to use `filter` instead of `simpleFilter`. We would do the following:
+Suppose on the same dataset we want to filter by objects with width between 3 and 5. Since our chart does not contain the width attribute we would need to use `filter` instead of `simpleFilter`. We would do the following:
 
 First initialize a list:
 ````
@@ -81,11 +81,11 @@ Plot.plot({
 Then define the filtered list based on weight:
 ````
 ``` js 
-filteredOnWeight = data.filter(x => x.weight >= 3 && x.weight <= 5);
+filteredOnWidth = data.filter(x => x.width >= 3 && x.width <= 5);
 ```
 ````
 
 Finally use the inline syntax to show the changes
 ```
-[Click here to show changes](`filter1=filteredOnWeight`)
+[Click here to show changes](`filter1=filteredOnWidth`)
 ```
