@@ -20,18 +20,21 @@ The official website of the 2016 Olympic Games in Rio [@olympians] gathered data
 # Analysis of Athletes
 ``` js {hide=true}
 olympiansSubset = olympians.slice(0, 500);
-//You may want create a new list here for Spanish athletes
+---
+simpleFilter1 = []
+---
+filter1 = []
+---
+spain = olympiansSubset.filter(x => x.nationality === 'ESP')
 ```
 
 
 We would like to filter the data:
 
-- By athletes between 2 and 2.5 meters tall using `simpleFilter`. The change should show when clicking **here**.
-- By athletes only from Spain using `filter` (hint: the dataset has a `nationality` attribute for each athlete and Spain is denoted as 'ESP'). The change should show when clicking **here**.
+- By athletes between 2 and 2.5 meters tall using `simpleFilter`. The change should show when clicking [**here**](`simpleFilter1=[['height',2,2.5]]`).
+- By athletes only from Spain using `filter` (hint: the dataset has a `nationality` attribute for each athlete and Spain is denoted as 'ESP'). The change should show when clicking [**here**](`filter1=spain`).
 
-- By something of your choice. You can find more data attributes from the website [@olympians].
-
-::: divi-viz
+::: divi-viz {simpleFilter=`simpleFilter1` filter=`filter1`}
 ``` js
 Plot.plot({
   grid: true,

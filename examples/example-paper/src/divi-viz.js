@@ -100,14 +100,12 @@ export default class Divi extends ArticleElement {
         }
 
         const state = that.__state;
-        console.log(state);
         let { svgMarks } = state;
         selectAllMarks(svgMarks);
 
         if (that.annotation.length > 0) {
           that.annotation.forEach((curr) => {
             const [x, y, value] = curr;
-            console.log(x, y, value);
             annotate(state, x, y, value);
           });
         }
@@ -123,9 +121,6 @@ export default class Divi extends ArticleElement {
             that.simpleFilter.forEach((f) => {
               // Check for exact value match
               if (f.length === 2) {
-                console.log(f);
-                console.log(infer[f[0]]);
-                console.log(f[1]);
                 if (typeof f[1] === "number") {
                   if (compareNumbers(infer[f[0]], f[1])) {
                     selectedMarks.push(d);
@@ -144,7 +139,6 @@ export default class Divi extends ArticleElement {
               }
             });
           });
-          console.log(selectedMarks);
           selectMarks(svgMarks, selectedMarks);
         }
       })
