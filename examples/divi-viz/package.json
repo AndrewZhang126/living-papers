@@ -1,0 +1,28 @@
+{
+    "private": true,
+    "name": "@living-papers/example-example-paper",
+    "description": "Example Living Papers DIVI article.",
+    "repository": "uwdata/living-papers",
+    "scripts": {
+      "prebuild": "mkdirp build-penguins && mkdirp build-olympians && mkdirp build-faithful && cp faithful.tsv build-faithful",
+      "build-penguins": "lpub -o build-penguins penguins.md",
+      "build-faithful": "lpub -o build-faithful faithful.md",
+      "build-olympians": "lpub -o build-olympians olympians.md"
+    },
+    "devDependencies": {
+      "@living-papers/cli": "*",
+      "mkdirp": "^2.1.6"
+    },
+    "living-papers": {
+      "components": [
+        {
+          "name": "divi-viz",
+          "file": "src/divi-viz.js"
+        }
+      ]
+    },
+    "dependencies": {
+      "d3-selection": "^3.0.0",
+      "uwdata-divi": "^0.0.0"
+    }
+}
